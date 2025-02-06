@@ -1,0 +1,21 @@
+services:
+  valkey:
+    image: valkey/valkey:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - valkey_data:/data
+
+  app:
+    image: node:alpine
+    init: true
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/opt
+    command: sh -c "rm -f /tmp/glide-socket* && /opt/entrypoint.sh"
+    depends_on:
+      - valkey
+
+volumes:
+  valkey_data:

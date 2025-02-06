@@ -1,10 +1,10 @@
-import { getValkey } from "./valkey";
+import client from "./valkey";
 
 export default function Home() {
 
   async function valkey() {
     'use server';
-    const valkey = getValkey();
+    const valkey = client;
   }
   valkey();
   return (
